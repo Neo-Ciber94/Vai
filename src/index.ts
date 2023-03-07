@@ -13,7 +13,9 @@ import {
   DateValidator,
   UnionValidator,
   VoidValidator,
+  LiteralValidator,
 } from "./validators/common";
+import { PrimitiveType } from "./validators/common/literal.validator";
 import { TupleValidator } from "./validators/common/tuple.validator";
 
 /**
@@ -61,14 +63,19 @@ const baseValidator = {
   undefined: () => new UndefinedValidator(),
 
   /**
+   * An void validator, same as undefined.
+   */
+  void: () => new VoidValidator(),
+
+  /**
    * A validator that always fails.
    */
   never: () => new NeverValidator(),
 
   /**
-   * An void validator, same as undefined.
+   * A validator for a constant literal type value.
    */
-  void: () => new VoidValidator(),
+  literal: <T extends PrimitiveType>(constant: T) => new LiteralValidator(constant),
 
   /**
    * Object validator.

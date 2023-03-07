@@ -25,3 +25,4 @@ export { UnionValidator } from "./union.validator";
 // Utilities
 export { NullableValidator } from "./nullable.validator";
 export { OptionalValidator } from "./optional.validator";
+export { LiteralValidator } from "./literal.validator";
