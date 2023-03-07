@@ -1,11 +1,13 @@
 import { ValidationResult, Validator } from "../../core/validator";
+import { IntegerValidator } from "../numbers";
+import { IntegerValidatorOptions } from "../numbers/integer.validator";
 
 export interface NumberValidatorOptions {
   message?: string | ((value: unknown) => string);
 }
 
 export class NumberValidator extends Validator<number> {
-  private readonly message: (value: unknown) => string;
+  protected readonly message: (value: unknown) => string;
 
   constructor(options: NumberValidatorOptions = {}) {
     super();
@@ -31,6 +33,10 @@ export class NumberValidator extends Validator<number> {
     }
 
     return { success: true, value };
+  }
+
+  integer(options: IntegerValidatorOptions = {}): IntegerValidator {
+    return new IntegerValidator(this, options);
   }
 }
 

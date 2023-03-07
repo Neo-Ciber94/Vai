@@ -5,7 +5,7 @@ export interface BooleanValidatorOptions {
 }
 
 export class BooleanValidator extends Validator<boolean> {
-  private readonly message: (value: unknown) => string;
+  protected readonly message: (value: unknown) => string;
 
   constructor(options: BooleanValidatorOptions = {}) {
     super();

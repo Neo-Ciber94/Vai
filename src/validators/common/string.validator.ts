@@ -5,7 +5,7 @@ export interface StringValidatorOptions {
 }
 
 export class StringValidator extends Validator<string> {
-  private readonly message: (value: unknown) => string;
+  protected readonly message: (value: unknown) => string;
 
   constructor(options: StringValidatorOptions = {}) {
     super();

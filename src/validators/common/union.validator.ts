@@ -34,7 +34,7 @@ export class UnionValidator<
 
     return {
       success: true,
-      value: value as Output,
+      value: value as unknown as Output,
     };
   }
 }

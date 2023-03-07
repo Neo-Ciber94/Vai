@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "incremental": true,
     "target": "ESNext",
     "module": "ESNext",
@@ -8,7 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictNullChecks": true,
-    
+    "noImplicitOverride": true,
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
   }

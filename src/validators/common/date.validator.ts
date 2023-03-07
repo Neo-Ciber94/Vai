@@ -5,7 +5,7 @@ export interface DateValidatorOptions {
 }
 
 export class DateValidator extends Validator<Date> {
-  private readonly message: (value: unknown) => string;
+  protected readonly message: (value: unknown) => string;
 
   constructor(options: DateValidatorOptions = {}) {
     super();

@@ -5,7 +5,7 @@ export interface SymbolValidatorOptions {
 }
 
 export class SymbolValidator extends Validator<symbol> {
-  private readonly message: (value: unknown) => string;
+  protected readonly message: (value: unknown) => string;
 
   constructor(options: SymbolValidatorOptions = {}) {
     super();

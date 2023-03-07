@@ -5,7 +5,7 @@ export interface BigIntValidatorOptions {
 }
 
 export class BigIntValidator extends Validator<bigint> {
-  private readonly message: (value: unknown) => string;
+  protected readonly message: (value: unknown) => string;
 
   constructor(options: BigIntValidatorOptions = {}) {
     super();
