@@ -17,7 +17,7 @@ import { TupleValidator } from "./validators/common/tuple.validator";
 /**
  * Convenient type for accessing the validators.
  */
-export const v = {
+const baseValidator = {
   /**
    * A validator that always success as any.
    */
@@ -82,3 +82,17 @@ export const v = {
     schema: T
   ) => new TupleValidator(schema),
 } as const;
+
+/**
+ * Creates the root validator for an application.
+ *
+ * Here you can add or override any existing validator.
+ * @param schemas The schemas to add.
+ * @returns A validator for the entire application.
+ */
+export function createValidator<T extends Record<string, Validator<unknown>>>(
+  schemas?: T
+): T & typeof baseValidator {
+  const initialSchemas: any = schemas || {};
+  return Object.freeze({ ...baseValidator, ...initialSchemas });
+}
