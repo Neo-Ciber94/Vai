@@ -27,11 +27,6 @@ if (result.success === true) {
   const value = result.value;
 }
 
-//console.log(result);
+const num = v.number().min(3);
 
-const union = v.union([v.string(), v.number(), v.boolean()]);
-const tuple = v.tuple([v.string(), v.number(), v.boolean()]);
-
-const v1 = union.parse(["hello", 12, true]);
-const v2 = tuple.parse(["hello", 12, true]);
-// [2].value
+console.log(num.parseSafe(1));

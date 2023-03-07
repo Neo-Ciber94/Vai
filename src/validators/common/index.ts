@@ -1,4 +1,3 @@
-// JS Primitives
 export { StringValidator } from "./string.validator";
 export { NumberValidator } from "./number.validator";
 export { BooleanValidator } from "./boolean.validator";
@@ -26,3 +25,6 @@ export { UnionValidator } from "./union.validator";
 export { NullableValidator } from "./nullable.validator";
 export { OptionalValidator } from "./optional.validator";
 export { LiteralValidator } from "./literal.validator";
+
+// Numbers
+export * from "../numbers";

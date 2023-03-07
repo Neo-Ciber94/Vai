@@ -8,8 +8,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictNullChecks": true,
-    "noImplicitOverride": true,
     "noImplicitAny": true,
+    "noImplicitOverride": false,
     "noFallthroughCasesInSwitch": true,
   }
 }
