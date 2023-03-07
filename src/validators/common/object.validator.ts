@@ -1,30 +1,38 @@
 import { ValidationContext } from "../../core/context";
-import { BaseArrayValidator, ValidationResult, Validator } from "../../core/validator";
-import { ArrayValidator } from "./array.validator";
+import {
+  BaseArrayValidator,
+  ValidationResult,
+  Validator,
+} from "../../core/validator";
 
 type ValidatorShape = {
   [key: string]: Validator<unknown>;
 };
 
-// type PartialBy<T, K extends keyof T> = {
-//   [P in Exclude<keyof T, K>]: T[P];
-// } & { [P in K]?: T[P] };
+/// Returns the keys of properties that are undefined
+type UndefinedKeys<T> = {
+  [K in keyof T]-?: undefined extends T[K] ? K : never;
+}[keyof T];
 
-// type UndefinedKeys<T> = {
-//   [K in keyof T]-?: undefined extends T[K] ? K : never;
-// }[keyof T];
+// Make any undefined properties optional
+type MakeUndefinedPropertiesOptional<T> = Omit<T, UndefinedKeys<T>> &
+  Pick<Partial<T>, UndefinedKeys<T>>;
 
-// type DefinedKeys<T> = {
-//   [K in keyof T]-?: undefined extends T[K] ? never : K;
-// }[keyof T];
+// This remove all utility types from `T` giving only the plain object
+type UnwrapType<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 
-// type PartialObject<T> = Pick<T, UndefinedKeys<T>>;
+// Here we make an object where properties types is the return type of the `parse`
+// function of each validator recursively, also we make any undefined properties optional.
+type _ObjectResult<T extends ValidatorShape> = MakeUndefinedPropertiesOptional<{
+  [K in keyof T]: ReturnType<T[K]["parse"]>;
+}>;
+
+// Type unwrapped
+type ObjectResult<T extends ValidatorShape> = UnwrapType<_ObjectResult<T>>;
 
 export class ObjectValidator<
   T extends ValidatorShape,
-  Output = {
-    [K in keyof T]: ReturnType<T[K]["parse"]>;
-  }
+  Output = ObjectResult<T>
 > extends Validator<Output> {
   constructor(private readonly shape: T) {
     super();
@@ -83,7 +91,8 @@ function parseWithContext(
 
     // For arrays we should track the path as a index
     else if (Array.isArray(value)) {
-      const arrayValidator = validator as unknown as BaseArrayValidator<unknown>;
+      const arrayValidator =
+        validator as unknown as BaseArrayValidator<unknown>;
       const result = arrayValidator.parseArraySafe(value);
       const index = result.index;
       const currentPath =

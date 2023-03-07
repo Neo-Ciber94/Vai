@@ -1,4 +1,4 @@
-# Vai
+# vai
 
 A runtime type validation library.
 
