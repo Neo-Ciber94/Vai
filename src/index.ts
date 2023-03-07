@@ -12,6 +12,7 @@ import {
   AnyValidator,
   DateValidator,
   UnionValidator,
+  VoidValidator,
 } from "./validators/common";
 import { TupleValidator } from "./validators/common/tuple.validator";
 
@@ -63,6 +64,11 @@ const baseValidator = {
    * A validator that always fails.
    */
   never: () => new NeverValidator(),
+
+  /**
+   * An void validator, same as undefined.
+   */
+  void: () => new VoidValidator(),
 
   /**
    * Object validator.
