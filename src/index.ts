@@ -11,6 +11,7 @@ import {
   ArrayValidator,
   AnyValidator,
   DateValidator,
+  UnionValidator,
 } from "./validators/common";
 import { TupleValidator } from "./validators/common/tuple.validator";
 
@@ -74,6 +75,12 @@ const baseValidator = {
    */
   array: <T extends Validator<unknown> = UnknownValidator>(schema?: T) =>
     new ArrayValidator<T>(schema!),
+
+  /**
+   * Makes an union of two validators.
+   */
+  union: <T extends Validator<unknown>[]>(schemas: T) =>
+    new UnionValidator(schemas),
 
   /**
    * A tuple validator.

@@ -1,4 +1,6 @@
-import { v } from ".";
+import { createValidator } from ".";
+
+const v = createValidator();
 
 const schema = v.object({
   age: v.number(),
@@ -27,13 +29,9 @@ if (result.success === true) {
 
 //console.log(result);
 
-const tuple = v.tuple([
-  v.string(),
-  v.number(),
-  v.object({
-    value: v.boolean(),
-  }),
-]);
+const union = v.union([v.string(), v.number(), v.boolean()]);
+const tuple = v.tuple([v.string(), v.number(), v.boolean()]);
 
-console.log(tuple.parseSafe(["hello", 1, { value: 100 }]));
+const v1 = union.parse(["hello", 12, true]);
+const v2 = tuple.parse(["hello", 12, true]);
 // [2].value

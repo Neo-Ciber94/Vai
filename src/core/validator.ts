@@ -1,7 +1,7 @@
 import {
   NullableValidator,
   OptionalValidator,
-  OrValidator,
+  UnionValidator,
 } from "../validators/common";
 import { VaiError } from "./error";
 
@@ -120,8 +120,8 @@ export abstract class Validator<T> {
   /**
    * Combines two validators.
    */
-  or<U extends Validator<unknown>>(validator: U): OrValidator<this, U> {
-    return new OrValidator(this, validator);
+  or<U extends Validator<unknown>>(validator: U): UnionValidator<[this, U]> {
+    return new UnionValidator([this, validator]);
   }
 }
 
