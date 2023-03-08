@@ -2,6 +2,8 @@ import { ValidationResult, Validator } from "../../core/validator";
 import { getErrorMessage } from "../../utils/getErrorMessage";
 import {
   CheckStringValidatorOptions,
+  EmailStringValidator,
+  EmailStringValidatorOptions,
   EndsWithStringValidator,
   ExactStringLengthValidator,
   IncludesStringValidator,
@@ -37,6 +39,14 @@ export class StringValidator extends Validator<string> {
     }
 
     return { success: true, value };
+  }
+
+  /**
+   * Checks if the parsed string is a valid email address.
+   * @param options The options.
+   */
+  email(options: EmailStringValidatorOptions = {}) {
+    return new EmailStringValidator(this, options);
   }
 
   /**
@@ -105,5 +115,21 @@ export class StringValidator extends Validator<string> {
   trim() {
     // SAFETY: We check anyway for null
     return this.afterParse((x) => (x == null ? x : x.trim()));
+  }
+
+  /**
+   * Converts this string to lowercase after parsed.
+   */
+  toLowerCase() {
+    // SAFETY: We check anyway for null
+    return this.afterParse((x) => (x == null ? x : x.toLowerCase()));
+  }
+
+  /**
+   * Converts this string to uppercase after parsed.
+   */
+  toUpperCase() {
+    // SAFETY: We check anyway for null
+    return this.afterParse((x) => (x == null ? x : x.toUpperCase()));
   }
 }

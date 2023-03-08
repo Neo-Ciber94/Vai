@@ -8,7 +8,7 @@ export interface MaxValidatorOptions {
 export class MaxValidator extends NumberValidator {
   constructor(
     private readonly parent: NumberValidator,
-    private readonly minValue: number,
+    private readonly maxValue: number,
     options: MaxValidatorOptions = {}
   ) {
     super({
@@ -17,16 +17,16 @@ export class MaxValidator extends NumberValidator {
         return typeof m === "string"
           ? m
           : typeof m === "function"
-          ? m(minValue, value)
-          : maxErrorFactory(minValue, value);
+          ? m(maxValue, value)
+          : maxErrorFactory(maxValue, value);
       },
     });
   }
 
   override parseSafe(value: unknown): ValidationResult<number> {
-    if (typeof value === "number" && value > this.minValue) {
+    if (typeof value === "number" && value > this.maxValue) {
       return {
-        error: maxErrorFactory(this.minValue, value),
+        error: maxErrorFactory(this.maxValue, value),
       };
     }
 
@@ -34,6 +34,6 @@ export class MaxValidator extends NumberValidator {
   }
 }
 
-const maxErrorFactory = (minValue: number, value: unknown) => {
-  return `maximum is ${minValue} but value was ${value}`;
+const maxErrorFactory = (maxValue: number, value: unknown) => {
+  return `maximum is ${maxValue} but value was ${value}`;
 };
