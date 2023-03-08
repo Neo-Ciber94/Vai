@@ -1,5 +1,6 @@
 import {
   AssertValidator,
+  DefaultValidator,
   NullableValidator,
   OptionalValidator,
   UnionValidator,
@@ -103,6 +104,14 @@ export abstract class Validator<T> {
         return defaultValue;
       }
     }
+  }
+
+  /**
+   * Adds a default value to the validator if the parsed value is null or undefined.
+   * @param defaultValue The default value or a function that returns the default value.
+   */
+  default(defaultValue: T | (() => T)): DefaultValidator<T> {
+    return new DefaultValidator(this, defaultValue);
   }
 
   /**
