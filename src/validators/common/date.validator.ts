@@ -24,7 +24,7 @@ export class DateValidator extends Validator<Date> {
   }
 
   parseSafe(value: unknown): ValidationResult<Date> {
-    if (!(value instanceof Date)) {
+    if (!(value instanceof Date) || Number.isNaN(value.getTime())) {
       return {
         error: this.message(value),
       };
