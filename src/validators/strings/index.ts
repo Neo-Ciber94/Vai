@@ -13,3 +13,8 @@ export {
   StartsWithStringValidator,
   IncludesStringValidator,
 } from "./check.validator";
+
+export {
+  EmailStringValidator,
+  EmailStringValidatorOptions,
+} from "./email.validator";
