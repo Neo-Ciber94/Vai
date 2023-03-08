@@ -10,13 +10,19 @@ export interface EnumValidatorOptions {
  */
 export type ValidEnumType = string | number | bigint;
 
+/**
+ * Returns the keys of an enum.
+ */
+export type EnumKeys<T extends readonly any[]> = T[number];
+
 export class EnumValidator<
-  T extends ValidEnumType,
-  U extends Readonly<[T, ...T[]]>
-> extends Validator<U> {
+  U extends ValidEnumType,
+  T extends Readonly<[U, ...U[]]>,
+  Output = EnumKeys<T>
+> extends Validator<Output> {
   protected readonly message: (value: unknown) => string;
 
-  constructor(private readonly values: U, options: EnumValidatorOptions = {}) {
+  constructor(private readonly values: T, options: EnumValidatorOptions = {}) {
     super();
 
     this.message = getErrorMessage(
@@ -25,12 +31,12 @@ export class EnumValidator<
     );
   }
 
-  parseSafe(value: unknown): ValidationResult<U> {
+  parseSafe(value: unknown): ValidationResult<Output> {
     for (const obj of this.values) {
       if (obj === value) {
         return {
           success: true,
-          value: value as U,
+          value: value as Output,
         };
       }
     }

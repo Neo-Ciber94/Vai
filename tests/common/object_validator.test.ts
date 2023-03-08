@@ -36,10 +36,12 @@ describe("ObjectValidator", () => {
   });
 
   test("input is no a valid enum value", () => {
-    expect(objectValidator.parseSafe({
+    expect(
+      objectValidator.parseSafe({
         name: "Rose",
         age: -43,
-        email: "hello@.com"
-    }).success).toBeFalsy();
+        email: "hello@.com",
+      }).success
+    ).toBeFalsy();
   });
 });

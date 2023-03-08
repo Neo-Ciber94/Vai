@@ -96,8 +96,8 @@ const baseValidator = {
    * @param values The valid values of the enum.
    * @param options The options.
    */
-  enum: <T extends ValidEnumType, U extends Readonly<[T, ...T[]]>>(
-    values: U,
+  enum: <U extends ValidEnumType, T extends Readonly<[U, ...U[]]>>(
+    values: T,
     options: EnumValidatorOptions = {}
   ) => new EnumValidator(values, options),
 
