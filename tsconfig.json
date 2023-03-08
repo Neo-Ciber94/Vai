@@ -9,7 +9,6 @@
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "noImplicitOverride": false,
     "noFallthroughCasesInSwitch": true,
   }
 }

@@ -1,19 +1,15 @@
+import { ValidatorOptions, getValidationError } from "../../core/options";
 import { ValidationResult } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 import { isEmail } from "../../utils/isEmail";
 import { StringValidator } from "../common";
-
-export interface EmailStringValidatorOptions {
-  message?: string | ((value: string) => string);
-}
 
 export class EmailStringValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
-    options: EmailStringValidatorOptions = {}
+    options: ValidatorOptions<string> = {}
   ) {
     super({
-      message: getErrorMessage(
+      message: getValidationError(
         options.message,
         () => `value is no a valid email address`
       ) as (value: unknown) => string,

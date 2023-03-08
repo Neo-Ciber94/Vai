@@ -1,6 +1,6 @@
 import { ArrayLengthValidatorOptions } from ".";
+import { getValidationError } from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 import { ArrayValidator, UnknownValidator } from "../common";
 
 export class ExactArrayLengthValidator<
@@ -15,7 +15,7 @@ export class ExactArrayLengthValidator<
     options: ArrayLengthValidatorOptions = {}
   ) {
     super();
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
       (v) => `array expected length is ${exactLength} but was ${v.length}`
     );
@@ -28,7 +28,8 @@ export class ExactArrayLengthValidator<
       return result;
     }
 
-    if ((result.value as any[]).length !== this.exactLength) {
+    const arr = result.value as unknown as unknown[];
+    if (arr.length !== this.exactLength) {
       return {
         error: this.message(value as any[]),
       };

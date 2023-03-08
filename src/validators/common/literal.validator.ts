@@ -1,5 +1,4 @@
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 
 /**
  * A primitive type.

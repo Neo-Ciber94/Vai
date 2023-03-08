@@ -11,8 +11,8 @@ export { AnyValidator } from "./any.validator";
 export { NeverValidator } from "./never.validator";
 export { UnknownValidator } from "./unknown.validator";
 export { VoidValidator } from "./void.validator";
-export { EnumValidator, EnumValidatorOptions } from "./enum.validator";
-export { RecordValidator, RecordValidatorOptions } from "./record.validator";
+export { EnumValidator } from "./enum.validator";
+export { RecordValidator } from "./record.validator";
 
 // Objects
 export { ObjectValidator } from "./object.validator";
@@ -30,10 +30,7 @@ export { LiteralValidator } from "./literal.validator";
 export { AssertValidator } from "./assert.validator";
 export { DefaultValidator } from "./default.validator";
 export { BeforeValidator, AfterValidator } from "./pipe.validator";
-export {
-  InstanceOfValidator,
-  InstanceOfValidatorOptions,
-} from "./instanceof.validator";
+export { InstanceOfValidator } from "./instanceof.validator";
 
 // Numbers
 export * from "../numbers";

@@ -1,7 +1,7 @@
 import { ArrayLengthValidatorOptions } from ".";
+import { getValidationError } from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
-import { AnyValidator, ArrayValidator, UnknownValidator } from "../common";
+import { AnyValidator, ArrayValidator } from "../common";
 
 export class MinArrayLengthValidator<
   T extends Validator<any> = AnyValidator,
@@ -15,7 +15,7 @@ export class MinArrayLengthValidator<
     options: ArrayLengthValidatorOptions = {}
   ) {
     super();
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
       (v) => `array min length is ${minLength} but was ${v.length}`
     );
@@ -28,7 +28,8 @@ export class MinArrayLengthValidator<
       return result;
     }
 
-    if ((result.value as any[]).length < this.minLength) {
+    const arr = result.value as unknown as unknown[];
+    if (arr.length < this.minLength) {
       return {
         error: this.message(value as any[]),
       };

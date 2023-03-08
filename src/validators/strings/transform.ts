@@ -1,6 +1,5 @@
 import { ValidationResult } from "../../core/validator";
 import { StringValidator } from "../common";
-import type { StringValidatorOptions } from "../common/string.validator";
 
 export class TrimStringValidator extends StringValidator {
   constructor(private readonly parent: StringValidator) {

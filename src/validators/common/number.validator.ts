@@ -1,25 +1,23 @@
 import { ValidationResult, Validator } from "../../core/validator";
 import {
   MinValidator,
-  IntegerValidatorOptions,
   MinValidatorOptions,
   IntegerValidator,
   MaxValidator,
   MaxValidatorOptions,
 } from ".";
-import { getErrorMessage } from "../../utils/getErrorMessage";
-
-export interface NumberValidatorOptions {
-  message?: string | ((value: unknown) => string);
-}
+import {
+  ErrorMessage,
+  ValidatorOptions,
+  getValidationError,
+} from "../../core/options";
 
 export class NumberValidator extends Validator<number> {
-  protected readonly message: (value: unknown) => string;
-
-  constructor(options: NumberValidatorOptions = {}) {
+  protected readonly message: ErrorMessage;
+  constructor(options: ValidatorOptions = {}) {
     super();
 
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
       (v) => `expected number but was ${typeof v}`
     );
@@ -35,7 +33,7 @@ export class NumberValidator extends Validator<number> {
     return { success: true, value };
   }
 
-  integer(options: IntegerValidatorOptions = {}): IntegerValidator {
+  integer(options: ValidatorOptions = {}): IntegerValidator {
     return new IntegerValidator(this, options);
   }
 

@@ -1,9 +1,6 @@
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 import {
-  CheckStringValidatorOptions,
   EmailStringValidator,
-  EmailStringValidatorOptions,
   EndsWithStringValidator,
   ExactStringLengthValidator,
   IncludesStringValidator,
@@ -11,24 +8,22 @@ import {
   MaxStringLengthValidator,
   MinStringLengthValidator,
   RegexValidator,
-  RegexValidatorOptions,
   StartsWithStringValidator,
-  StringLengthValidatorOptions,
   TrimStringValidator,
   UpperCaseStringValidator,
 } from ".";
-
-export interface StringValidatorOptions {
-  message?: string | ((value: unknown) => string);
-}
+import {
+  ErrorMessage,
+  ValidatorOptions,
+  getValidationError,
+} from "../../core/options";
 
 export class StringValidator extends Validator<string> {
-  protected readonly message: (value: unknown) => string;
-
-  constructor(options: StringValidatorOptions = {}) {
+  protected readonly message: ErrorMessage;
+  constructor(options: ValidatorOptions = {}) {
     super();
 
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
       (v) => `expected string but was ${typeof v}`
     );
@@ -48,7 +43,7 @@ export class StringValidator extends Validator<string> {
    * Checks if the parsed string is a valid email address.
    * @param options The options.
    */
-  email(options: EmailStringValidatorOptions = {}) {
+  email(options: ValidatorOptions = {}) {
     return new EmailStringValidator(this, options);
   }
 
@@ -57,7 +52,7 @@ export class StringValidator extends Validator<string> {
    * @param regex The regex used to match the string.
    * @param options The options.
    */
-  regex(regex: RegExp, options: RegexValidatorOptions = {}) {
+  regex(regex: RegExp, options: ValidatorOptions = {}) {
     return new RegexValidator(this, regex, options);
   }
 
@@ -66,7 +61,7 @@ export class StringValidator extends Validator<string> {
    * @param minLength The minimum length of the string.
    * @param options The options.
    */
-  min(minLength: number, options: StringLengthValidatorOptions = {}) {
+  min(minLength: number, options: ValidatorOptions = {}) {
     return new MinStringLengthValidator(this, minLength, options);
   }
 
@@ -75,7 +70,7 @@ export class StringValidator extends Validator<string> {
    * @param maxLength The maximum length of the string.
    * @param options The options.
    */
-  max(maxLength: number, options: StringLengthValidatorOptions = {}) {
+  max(maxLength: number, options: ValidatorOptions = {}) {
     return new MaxStringLengthValidator(this, maxLength, options);
   }
 
@@ -84,7 +79,7 @@ export class StringValidator extends Validator<string> {
    * @param exactLength The length expected from the string.
    * @param options The options.
    */
-  length(exactLength: number, options: StringLengthValidatorOptions = {}) {
+  length(exactLength: number, options: ValidatorOptions = {}) {
     return new ExactStringLengthValidator(this, exactLength, options);
   }
 
@@ -92,7 +87,7 @@ export class StringValidator extends Validator<string> {
    * After parse checks if the string starts with the given string.
    * @param str The string to use.
    */
-  startsWith(str: string, options: CheckStringValidatorOptions = {}) {
+  startsWith(str: string, options: ValidatorOptions = {}) {
     return new StartsWithStringValidator(this, str, options);
   }
 
@@ -100,7 +95,7 @@ export class StringValidator extends Validator<string> {
    * After parse checks if the string ends with the given string.
    * @param str The string to use.
    */
-  endsWith(str: string, options: CheckStringValidatorOptions = {}) {
+  endsWith(str: string, options: ValidatorOptions = {}) {
     return new EndsWithStringValidator(this, str, options);
   }
 
@@ -108,7 +103,7 @@ export class StringValidator extends Validator<string> {
    * After parse checks if the string includes with the given string.
    * @param str The string to use.
    */
-  includes(str: string, options: CheckStringValidatorOptions = {}) {
+  includes(str: string, options: ValidatorOptions = {}) {
     return new IncludesStringValidator(this, str, options);
   }
 

@@ -1,17 +1,17 @@
+import {
+  ErrorMessage,
+  ValidatorOptions,
+  getValidationError,
+} from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
-
-export interface BigIntValidatorOptions {
-  message?: string | ((value: unknown) => string);
-}
 
 export class BigIntValidator extends Validator<bigint> {
-  protected readonly message: (value: unknown) => string;
+  protected readonly message: ErrorMessage;
 
-  constructor(options: BigIntValidatorOptions = {}) {
+  constructor(options: ValidatorOptions = {}) {
     super();
 
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
       (v) => `expected bigint but was ${typeof v}`
     );

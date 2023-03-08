@@ -17,18 +17,12 @@ import {
   InstanceOfValidator,
   TupleValidator,
   EnumValidator,
-  EnumValidatorOptions,
-  InstanceOfValidatorOptions,
   RecordValidator,
-  RecordValidatorOptions,
 } from "./validators/common";
-import type { BooleanValidatorOptions } from "./validators/common/boolean.validator";
-import type { DateValidatorOptions } from "./validators/common/date.validator";
 import type { ValidEnumType } from "./validators/common/enum.validator";
 import type { PrimitiveType } from "./validators/common/literal.validator";
-import { NumberValidatorOptions } from "./validators/common/number.validator";
 import type { ObjectType } from "./validators/common/instanceof.validator";
-import { StringValidatorOptions } from "./validators/common/string.validator";
+import { ValidatorOptions } from "./core/options";
 
 /**
  * Convenient type for accessing the validators.
@@ -47,25 +41,22 @@ const baseValidator = {
   /**
    * String validator.
    */
-  string: (options: StringValidatorOptions = {}) =>
-    new StringValidator(options),
+  string: (options: ValidatorOptions = {}) => new StringValidator(options),
 
   /**
    * Number validator.
    */
-  number: (options: NumberValidatorOptions = {}) =>
-    new NumberValidator(options),
+  number: (options: ValidatorOptions = {}) => new NumberValidator(options),
 
   /**
    * Boolean validator.
    */
-  boolean: (options: BooleanValidatorOptions = {}) =>
-    new BooleanValidator(options),
+  boolean: (options: ValidatorOptions = {}) => new BooleanValidator(options),
 
   /**
    * Date validator.
    */
-  date: (options: DateValidatorOptions = {}) => new DateValidator(options),
+  date: (options: ValidatorOptions = {}) => new DateValidator(options),
 
   /**
    * A null validator.
@@ -100,7 +91,7 @@ const baseValidator = {
    */
   enum: <U extends ValidEnumType, T extends Readonly<[U, ...U[]]>>(
     values: T,
-    options: EnumValidatorOptions = {}
+    options: ValidatorOptions = {}
   ) => new EnumValidator(values, options),
 
   /**
@@ -108,10 +99,8 @@ const baseValidator = {
    * @param obj The object constructor.
    * @param options The options.
    */
-  instanceof: <T extends ObjectType>(
-    obj: T,
-    options: InstanceOfValidatorOptions = {}
-  ) => new InstanceOfValidator(obj, options),
+  instanceof: <T extends ObjectType>(obj: T, options: ValidatorOptions = {}) =>
+    new InstanceOfValidator(obj, options),
 
   /**
    * Object validator.
@@ -147,7 +136,7 @@ const baseValidator = {
   record: <K extends Validator<string>, V extends Validator<any>>(
     keyValidator: K,
     valueValidator: V,
-    options: RecordValidatorOptions
+    options: ValidatorOptions
   ) => new RecordValidator(keyValidator, valueValidator, options),
 } as const;
 

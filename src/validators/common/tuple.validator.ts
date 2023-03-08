@@ -1,9 +1,19 @@
 import { BaseArrayValidator, Validator } from "../../core/validator";
 import { ArrayValidationResult } from "./array.validator";
+import { Callable } from "../../utils/types";
+
+// This type is suppose to be just, but typescript complains
+// type MakeValidatorTuple<T extends Validator<any>[]> = {
+//   [K in keyof T]: ReturnType<T[K]["parse"]>;
+// };
 
 // Map each index to the return type of the `parse` method of the element in that index
 type MakeValidatorTuple<T extends Validator<any>[]> = {
-  [K in keyof T]: ReturnType<T[K]["parse"]>;
+  [K in keyof T]: "parse" extends keyof T[K]
+    ? T[K]["parse"] extends Callable
+      ? ReturnType<T[K]["parse"]>
+      : never
+    : never;
 };
 
 export class TupleValidator<

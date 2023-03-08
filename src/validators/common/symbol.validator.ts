@@ -1,17 +1,16 @@
+import {
+  ErrorMessage,
+  ValidatorOptions,
+  getValidationError,
+} from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
-
-export interface SymbolValidatorOptions {
-  message?: string | ((value: unknown) => string);
-}
 
 export class SymbolValidator extends Validator<symbol> {
-  protected readonly message: (value: unknown) => string;
-
-  constructor(options: SymbolValidatorOptions = {}) {
+  protected readonly message: ErrorMessage;
+  constructor(options: ValidatorOptions = {}) {
     super();
 
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
       (v) => `expected symbol but was ${typeof v}`
     );

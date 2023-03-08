@@ -1,15 +1,15 @@
 import { ValidationContext } from "../../core/context";
 import {
+  ErrorMessage,
+  ValidatorOptions,
+  getValidationError,
+} from "../../core/options";
+import {
   BaseObjectValidator,
   ValidationResult,
   Validator,
 } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 import { UnknownValidator } from "./unknown.validator";
-
-export type RecordValidatorOptions = {
-  message?: string | ((value: unknown) => string);
-};
 
 type RecordKeyType<K extends Validator<string>> = K extends Validator<infer U>
   ? U
@@ -20,15 +20,15 @@ export class RecordValidator<
   V extends Validator<any> = UnknownValidator,
   Output = Record<RecordKeyType<K>, ReturnType<V["parse"]>>
 > extends BaseObjectValidator<Output> {
-  private readonly message: (value: unknown) => string;
+  private readonly message: ErrorMessage;
 
   constructor(
     private readonly keyValidator: K,
     private readonly valueValidator: V,
-    options: RecordValidatorOptions = {}
+    options: ValidatorOptions = {}
   ) {
     super();
-    this.message = getErrorMessage(options.message, "invalid record type");
+    this.message = getValidationError(options.message, "invalid record type");
   }
 
   parseObjectSafe(

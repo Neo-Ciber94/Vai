@@ -1,14 +1,11 @@
+import { ValidatorOptions } from "../../core/options";
 import { ValidationResult } from "../../core/validator";
 import { NumberValidator } from "../common";
-
-export interface IntegerValidatorOptions {
-  message?: string | ((value: unknown) => string);
-}
 
 export class IntegerValidator extends NumberValidator {
   constructor(
     private readonly parent: NumberValidator,
-    options: IntegerValidatorOptions = {}
+    options: ValidatorOptions = {}
   ) {
     super({
       message: options.message || integerErrorFactory,

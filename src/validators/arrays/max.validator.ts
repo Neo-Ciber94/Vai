@@ -1,6 +1,6 @@
 import { ArrayLengthValidatorOptions } from ".";
+import { getValidationError } from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 import { ArrayValidator, UnknownValidator } from "../common";
 
 export class MaxArrayLengthValidator<
@@ -15,7 +15,7 @@ export class MaxArrayLengthValidator<
     options: ArrayLengthValidatorOptions = {}
   ) {
     super();
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
       (v) => `array max length is ${maxLength} but was ${v.length}`
     );
@@ -28,7 +28,8 @@ export class MaxArrayLengthValidator<
       return result;
     }
 
-    if ((result.value as any[]).length > this.maxLength) {
+    const arr = result.value as unknown as unknown[];
+    if (arr.length > this.maxLength) {
       return {
         error: this.message(value as any[]),
       };

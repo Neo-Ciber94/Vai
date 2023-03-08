@@ -1,19 +1,15 @@
+import { ValidatorOptions, getValidationError } from "../../core/options";
 import { ValidationResult } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 import { StringValidator } from "../common";
-
-export type CheckStringValidatorOptions = {
-  message?: string | ((value: string) => string);
-};
 
 export class StartsWithStringValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
     private readonly s: string,
-    options: CheckStringValidatorOptions = {}
+    options: ValidatorOptions = {}
   ) {
     super({
-      message: getErrorMessage(
+      message: getValidationError(
         options.message,
         () => `string doesn't starts with "${s}"`
       ) as (value: unknown) => string,
@@ -40,10 +36,10 @@ export class EndsWithStringValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
     private readonly s: string,
-    options: CheckStringValidatorOptions = {}
+    options: ValidatorOptions<string> = {}
   ) {
     super({
-      message: getErrorMessage(
+      message: getValidationError(
         options.message,
         () => `string doesn't ends with "${s}"`
       ) as (value: unknown) => string,
@@ -70,10 +66,10 @@ export class IncludesStringValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
     private readonly s: string,
-    options: CheckStringValidatorOptions = {}
+    options: ValidatorOptions<string> = {}
   ) {
     super({
-      message: getErrorMessage(
+      message: getValidationError(
         options.message,
         () => `string doesn't includes "${s}"`
       ) as (value: unknown) => string,

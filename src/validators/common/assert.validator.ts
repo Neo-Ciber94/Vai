@@ -1,5 +1,5 @@
+import { getValidationError } from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
 
 export interface AssertValidatorOptions<T> {
   condition: (value: T) => boolean;
@@ -8,7 +8,7 @@ export interface AssertValidatorOptions<T> {
 
 export class AssertValidator<T> extends Validator<T> {
   private readonly condition: (value: T) => boolean;
-  private readonly message: (value: T) => string;
+  private readonly getMessage: (value: T) => string;
 
   constructor(parent: Validator<T>, options: AssertValidatorOptions<T>);
 
@@ -27,10 +27,13 @@ export class AssertValidator<T> extends Validator<T> {
 
     if (typeof conditionOrOptions === "object") {
       this.condition = conditionOrOptions.condition;
-      this.message = getErrorMessage(conditionOrOptions.message, "assertion failed");
+      this.getMessage = getValidationError(
+        conditionOrOptions.message,
+        "assertion failed"
+      );
     } else {
       this.condition = conditionOrOptions;
-      this.message = getErrorMessage(message, "assertion failed");
+      this.getMessage = getValidationError(message, "assertion failed");
     }
   }
 
@@ -41,11 +44,11 @@ export class AssertValidator<T> extends Validator<T> {
       return result;
     }
 
-    const success = this.condition(result as T);
+    const success = this.condition(result as unknown as T);
 
     if (!success) {
       return {
-        error: this.message(value as T),
+        error: this.getMessage(value as unknown as T),
       };
     }
 

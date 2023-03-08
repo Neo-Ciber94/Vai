@@ -1,21 +1,19 @@
+import {
+  ErrorMessage,
+  ValidatorOptions,
+  getValidationError,
+} from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
-import { getErrorMessage } from "../../utils/getErrorMessage";
-
-export interface BooleanValidatorOptions {
-  message?: string | ((value: unknown) => string);
-}
 
 export class BooleanValidator extends Validator<boolean> {
-  protected readonly message: (value: unknown) => string;
+  protected readonly message: ErrorMessage;
 
-  constructor(options: BooleanValidatorOptions = {}) {
+  constructor(options: ValidatorOptions = {}) {
     super();
 
-    const message = options.message;
-
-    this.message = getErrorMessage(
+    this.message = getValidationError(
       options.message,
-      (v) => `boolean bigint but was ${typeof v}`
+      (v) => `expected boolean but was ${typeof v}`
     );
   }
 
