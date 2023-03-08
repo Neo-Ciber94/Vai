@@ -1,5 +1,10 @@
 # vai
 
+![CI][ci-badge]
+
+[CI]: https://github.com/Neo-Ciber94/Vai/actions/workflows/ci.yml
+[ci-badge]: https://github.com/Neo-Ciber94/Vai/actions/workflows/ci.yml/badge.svg
+
 A runtime type validation library.
 
 ## Why?
@@ -12,7 +17,8 @@ This library is a simple version of a type validation library inspired in `Zod`,
 import { createValidator } from "vai";
 
 /// Define the validator to use in your application,
-/// createValidator also accepts an object of validators to extend it
+/// `createValidator` also accepts an object of validators to extend it 
+/// or overwrite existing validators
 export const v = createValidator();
 
 // Define a schema
@@ -34,16 +40,15 @@ const personSchema = v.object({
 });
 
 personSchema.parse({
-    name: "Pauline",
-    age: 23,
-    email: "pauline@example.com",
-    games: [
-        {
-            name: "Super Mario Odyssey",
-            genre: "platformer",
-            price: 39
-        }
-    ]
-})
-
+  name: "Pauline",
+  age: 23,
+  email: "pauline@example.com",
+  games: [
+    {
+      name: "Super Mario Odyssey",
+      genre: "platformer",
+      price: 39,
+    },
+  ],
+});
 ```
