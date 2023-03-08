@@ -5,7 +5,7 @@ import {
 } from "../../core/validator";
 
 export class UnionValidator<
-  T extends Validator<unknown>[],
+  T extends Validator<any>[],
   Output = ReturnType<T[number]["parse"]>
 > extends BaseArrayValidator<Output> {
   constructor(private readonly schema: T) {

@@ -2,12 +2,12 @@ import { BaseArrayValidator, Validator } from "../../core/validator";
 import { ArrayValidationResult } from "./array.validator";
 
 // Map each index to the return type of the `parse` method of the element in that index
-type MakeValidatorTuple<T extends Validator<unknown>[]> = {
+type MakeValidatorTuple<T extends Validator<any>[]> = {
   [K in keyof T]: ReturnType<T[K]["parse"]>;
 };
 
 export class TupleValidator<
-  T extends Validator<unknown>[],
+  T extends Validator<any>[],
   Output = MakeValidatorTuple<T>
 > extends BaseArrayValidator<Output> {
   constructor(private readonly schema: T) {

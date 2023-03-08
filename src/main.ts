@@ -27,6 +27,6 @@ if (result.success === true) {
   const value = result.value;
 }
 
-const num = v.number().min(3);
+const num = v.number().assert(x => x > 3, "value should be greater than 3")
 
 console.log(num.parseSafe(1));

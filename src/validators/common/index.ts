@@ -25,6 +25,7 @@ export { UnionValidator } from "./union.validator";
 export { NullableValidator } from "./nullable.validator";
 export { OptionalValidator } from "./optional.validator";
 export { LiteralValidator } from "./literal.validator";
+export { AssertValidator } from "./assert.validator";
 
 // Numbers
 export * from "../numbers";

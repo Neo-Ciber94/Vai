@@ -6,7 +6,7 @@ import {
 } from "../../core/validator";
 
 type ValidatorShape = {
-  [key: string]: Validator<unknown>;
+  [key: string]: Validator<any>;
 };
 
 /// Returns the keys of properties that are undefined

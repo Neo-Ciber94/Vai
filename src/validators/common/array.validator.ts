@@ -10,7 +10,7 @@ export type ArrayValidationResult<T> = ValidationResult<T> & {
 };
 
 export class ArrayValidator<
-  T extends Validator<unknown> = UnknownValidator,
+  T extends Validator<any> = UnknownValidator,
   Output = ReturnType<T["parse"]>[]
 > extends BaseArrayValidator<Output> {
   private readonly schema: T;

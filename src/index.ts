@@ -81,7 +81,7 @@ const baseValidator = {
   /**
    * Object validator.
    */
-  object: <T extends Record<string, Validator<unknown>>>(shape: T) =>
+  object: <T extends Record<string, Validator<any>>>(shape: T) =>
     new ObjectValidator<T>(shape),
 
   /**

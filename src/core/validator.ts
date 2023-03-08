@@ -1,8 +1,10 @@
 import {
+  AssertValidator,
   NullableValidator,
   OptionalValidator,
   UnionValidator,
 } from "../validators/common";
+import { AssertValidatorOptions } from "../validators/common/assert.validator";
 import { VaiError } from "./error";
 
 /**
@@ -120,8 +122,35 @@ export abstract class Validator<T> {
   /**
    * Combines two validators.
    */
-  or<U extends Validator<unknown>>(validator: U): UnionValidator<[this, U]> {
+  or<U extends Validator<any>>(validator: U): UnionValidator<[this, U]> {
     return new UnionValidator([this, validator]);
+  }
+
+  /**
+   * After parsing checks if the given condition is true for the value.
+   * @param condition The condition to check.
+   * @param message An error message.
+   */
+  assert(
+    condition: (value: T) => boolean,
+    message?: string | ((value: T) => string)
+  ): AssertValidator<T>;
+
+  /**
+   * After parsing checks if the a condition is true for the value.
+   * @param options The options for parsing.
+   */
+  assert(options: AssertValidatorOptions<T>): AssertValidator<T>;
+
+  assert(
+    conditionOrOptions: ((value: T) => boolean) | AssertValidatorOptions<T>,
+    message?: string | ((value: T) => string)
+  ): AssertValidator<T> {
+    if (typeof conditionOrOptions === "object") {
+      return new AssertValidator(this, conditionOrOptions);
+    } else {
+      return new AssertValidator(this, conditionOrOptions, message);
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import { ValidationResult, Validator } from "../../core/validator";
 
 export class NullableValidator<
-  T extends Validator<unknown>,
+  T extends Validator<any>,
   Output = ReturnType<T["parse"]> | null
 > extends Validator<Output> {
   constructor(private readonly validator: T) {
