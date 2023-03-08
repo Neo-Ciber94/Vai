@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["airbnb-base"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -13,5 +13,8 @@ module.exports = {
   plugins: ["@typescript-eslint", "prettier"],
   rules: {
     "prettier/prettier": "error",
+    quotes: ["error", "double"],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
 };

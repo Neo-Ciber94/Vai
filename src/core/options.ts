@@ -28,6 +28,7 @@ export function getValidationError<T extends unknown[]>(
   }
 
   return (...params: T) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return typeof message === "string" ? message : message!(...params);
   };
 }

@@ -11,7 +11,7 @@ export class EmailStringValidator extends StringValidator {
     super({
       message: getValidationError(
         options.message,
-        () => `value is no a valid email address`
+        () => "value is no a valid email address"
       ) as (value: unknown) => string,
     });
   }
