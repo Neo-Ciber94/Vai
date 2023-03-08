@@ -1,5 +1,7 @@
 import {
+  AfterValidator,
   AssertValidator,
+  BeforeValidator,
   DefaultValidator,
   NullableValidator,
   OptionalValidator,
@@ -133,6 +135,22 @@ export abstract class Validator<T> {
    */
   or<U extends Validator<any>>(validator: U): UnionValidator<[this, U]> {
     return new UnionValidator([this, validator]);
+  }
+
+  /**
+   * Runs a function before map the value.
+   * @param mapper A function to map the input value before parsing.
+   */
+  beforeParse(mapper: (value: any) => unknown): BeforeValidator<this, T> {
+    return new BeforeValidator(this, mapper);
+  }
+
+  /**
+   * Runs a function after map the value.
+   * @param mapper A function to map the resulting value.
+   */
+  afterParse<R>(mapper: (value: T) => R): AfterValidator<this, T, R> {
+    return new AfterValidator(this, mapper);
   }
 
   /**

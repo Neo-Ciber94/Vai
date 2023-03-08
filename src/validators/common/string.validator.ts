@@ -13,7 +13,7 @@ export class StringValidator extends Validator<string> {
 
     this.message = getErrorMessage(
       options.message,
-      (v) => `string number but was ${typeof v}`
+      (v) => `expected string but was ${typeof v}`
     );
   }
 

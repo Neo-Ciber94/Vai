@@ -26,6 +26,8 @@ export { NullableValidator } from "./nullable.validator";
 export { OptionalValidator } from "./optional.validator";
 export { LiteralValidator } from "./literal.validator";
 export { AssertValidator } from "./assert.validator";
+export { DefaultValidator } from "./default.validator";
+export { BeforeValidator, AfterValidator } from "./pipe.validator";
 
 // Numbers
 export * from "../numbers";
