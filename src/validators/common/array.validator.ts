@@ -3,6 +3,13 @@ import {
   ValidationResult,
   Validator,
 } from "../../core/validator";
+import {
+  ArrayLengthValidatorOptions,
+  ExactArrayLengthValidator,
+  MaxArrayLengthValidator,
+  MinArrayLengthValidator,
+} from "../arrays";
+
 import { UnknownValidator } from "./unknown.validator";
 
 export type ArrayValidationResult<T> = ValidationResult<T> & {
@@ -48,5 +55,26 @@ export class ArrayValidator<
       success: true,
       value: value as any,
     };
+  }
+
+  min(
+    minLength: number,
+    options: ArrayLengthValidatorOptions = {}
+  ): MinArrayLengthValidator<T, Output> {
+    return new MinArrayLengthValidator(this, minLength, options);
+  }
+
+  max(
+    maxLength: number,
+    options: ArrayLengthValidatorOptions = {}
+  ): MaxArrayLengthValidator<T, Output> {
+    return new MaxArrayLengthValidator(this, maxLength, options);
+  }
+
+  length(
+    exactLength: number,
+    options: ArrayLengthValidatorOptions = {}
+  ): ExactArrayLengthValidator<T, Output> {
+    return new ExactArrayLengthValidator(this, exactLength, options);
   }
 }

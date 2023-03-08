@@ -1,18 +1,10 @@
-export {
-  MaxStringLengthValidator,
-  MaxStringLengthValidatorOptions,
-} from "./max.validator";
+export interface StringLengthValidatorOptions {
+  message?: string | ((value: string) => string);
+}
 
-export {
-  MinStringLengthValidator,
-  MinStringLengthValidatorOptions,
-} from "./min.validator";
-
-export {
-  ExactStringLengthValidator,
-  ExactStringLengthValidatorOptions,
-} from "./length.validator";
-
+export { MaxStringLengthValidator } from "./max.validator";
+export { MinStringLengthValidator } from "./min.validator";
+export { ExactStringLengthValidator } from "./length.validator";
 export { RegexValidator, RegexValidatorOptions } from "./regex.validator";
 
 export {

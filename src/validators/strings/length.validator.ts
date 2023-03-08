@@ -1,15 +1,12 @@
+import { StringLengthValidatorOptions } from ".";
 import { ValidationResult } from "../../core/validator";
 import { StringValidator } from "../common";
-
-export interface ExactStringLengthValidatorOptions {
-  message?: string | ((value: string) => string);
-}
 
 export class ExactStringLengthValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
     private readonly exactLength: number,
-    options: ExactStringLengthValidatorOptions = {}
+    options: StringLengthValidatorOptions = {}
   ) {
     super({
       message: (value: unknown) => {

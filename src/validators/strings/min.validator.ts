@@ -1,15 +1,12 @@
+import { StringLengthValidatorOptions } from ".";
 import { ValidationResult } from "../../core/validator";
 import { StringValidator } from "../common";
-
-export interface MinStringLengthValidatorOptions {
-  message?: string | ((value: string) => string);
-}
 
 export class MinStringLengthValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
     private readonly minLength: number,
-    options: MinStringLengthValidatorOptions = {}
+    options: StringLengthValidatorOptions = {}
   ) {
     super({
       message: (value: unknown) => {

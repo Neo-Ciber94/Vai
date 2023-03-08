@@ -1,15 +1,12 @@
+import { StringLengthValidatorOptions } from ".";
 import { ValidationResult } from "../../core/validator";
 import { StringValidator } from "../common";
-
-export interface MaxStringLengthValidatorOptions {
-  message?: string | ((value: string) => string);
-}
 
 export class MaxStringLengthValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
     private readonly maxLength: number,
-    options: MaxStringLengthValidatorOptions = {}
+    options: StringLengthValidatorOptions = {}
   ) {
     super({
       message: (value: unknown) => {

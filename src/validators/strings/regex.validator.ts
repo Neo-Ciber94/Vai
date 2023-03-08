@@ -8,14 +8,14 @@ export interface RegexValidatorOptions {
 export class RegexValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
-    private readonly regex: RegExp,
+    private readonly expr: RegExp,
     options: RegexValidatorOptions = {}
   ) {
     super({
       message: (value: unknown) => {
         const m =
           options.message ||
-          (() => `string doesn't match the expression: ${regex.toString()}`);
+          (() => `string doesn't match the expression: ${expr.toString()}`);
         return typeof m === "string" ? m : m(value as string);
       },
     });
@@ -28,7 +28,7 @@ export class RegexValidator extends StringValidator {
       return result;
     }
 
-    if (!this.regex.test(result.value)) {
+    if (!this.expr.test(result.value)) {
       return {
         error: this.message(value),
       };
