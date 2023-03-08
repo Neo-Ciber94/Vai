@@ -1,6 +1,7 @@
 import { ValidationContext } from "../../core/context";
 import {
   BaseArrayValidator,
+  BaseObjectValidator,
   ValidationResult,
   Validator,
 } from "../../core/validator";
@@ -33,33 +34,28 @@ type ObjectResult<T extends ValidatorShape> = UnwrapType<_ObjectResult<T>>;
 export class ObjectValidator<
   T extends ValidatorShape,
   Output = ObjectResult<T>
-> extends Validator<Output> {
+> extends BaseObjectValidator<Output> {
   constructor(private readonly shape: T) {
     super();
   }
 
-  parseSafe(value: unknown): ValidationResult<Output> {
+  parseObjectSafe(
+    value: unknown,
+    ctx: ValidationContext
+  ): ValidationResult<Output> {
     if (typeof value !== "object") {
       return {
         error: `expected object but was ${typeof value}`,
       };
     }
 
-    const context = new ValidationContext();
     const path: string[] = [];
     const obj = parseWithContext(
       value,
       this.shape,
       path,
-      context
+      ctx
     ) as unknown as Output;
-
-    if (!context.isValid) {
-      const validationError = context.errors[0];
-      const path = (validationError.path || []).join(".");
-      const error = `${path}: ${validationError.message}`;
-      return { error };
-    }
 
     return { success: true, value: obj };
   }

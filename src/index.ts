@@ -19,6 +19,8 @@ import {
   EnumValidator,
   EnumValidatorOptions,
   InstanceOfValidatorOptions,
+  RecordValidator,
+  RecordValidatorOptions,
 } from "./validators/common";
 import type { BooleanValidatorOptions } from "./validators/common/boolean.validator";
 import type { DateValidatorOptions } from "./validators/common/date.validator";
@@ -135,6 +137,18 @@ const baseValidator = {
   tuple: <T extends [] | [Validator<unknown>, ...Validator<unknown>[]]>(
     schema: T
   ) => new TupleValidator(schema),
+
+  /**
+   * A validator for a record type.
+   * @param keyValidator The validator for the keys.
+   * @param valueValidator The validator for the values.
+   * @param options The options.
+   */
+  record: <K extends Validator<string>, V extends Validator<any>>(
+    keyValidator: K,
+    valueValidator: V,
+    options: RecordValidatorOptions
+  ) => new RecordValidator(keyValidator, valueValidator, options),
 } as const;
 
 /**

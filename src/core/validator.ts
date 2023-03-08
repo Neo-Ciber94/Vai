@@ -8,6 +8,7 @@ import {
   UnionValidator,
 } from "../validators/common";
 import { AssertValidatorOptions } from "../validators/common/assert.validator";
+import { ValidationContext } from "./context";
 import { VaiError } from "./error";
 
 /**
@@ -201,4 +202,33 @@ export abstract class BaseArrayValidator<T> extends Validator<T> {
    * @param value The array to validate.
    */
   abstract parseArraySafe(value: unknown): ArrayValidationResult<T>;
+}
+
+/**
+ * Base class for object validation.
+ */
+export abstract class BaseObjectValidator<T> extends Validator<T> {
+  abstract parseObjectSafe(
+    value: unknown,
+    ctx: ValidationContext
+  ): ValidationResult<T>;
+
+  parseSafe(value: unknown): ValidationResult<T> {
+    const context = new ValidationContext();
+    const result = this.parseObjectSafe(value, context);
+
+    if (result.success === true && context.isValid) {
+      return result;
+    }
+
+    const validationError = context.errors[0];
+
+    if (validationError == null) {
+      return result;
+    }
+
+    const path = (validationError.path || []).join(".");
+    const error = `${path}: ${validationError.message}`;
+    return { error };
+  }
 }

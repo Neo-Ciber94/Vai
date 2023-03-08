@@ -12,6 +12,7 @@ export { NeverValidator } from "./never.validator";
 export { UnknownValidator } from "./unknown.validator";
 export { VoidValidator } from "./void.validator";
 export { EnumValidator, EnumValidatorOptions } from "./enum.validator";
+export { RecordValidator, RecordValidatorOptions } from "./record.validator";
 
 // Objects
 export { ObjectValidator } from "./object.validator";
