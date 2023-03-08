@@ -7,12 +7,15 @@ import {
   EndsWithStringValidator,
   ExactStringLengthValidator,
   IncludesStringValidator,
+  LowerCaseStringValidator,
   MaxStringLengthValidator,
   MinStringLengthValidator,
   RegexValidator,
   RegexValidatorOptions,
   StartsWithStringValidator,
   StringLengthValidatorOptions,
+  TrimStringValidator,
+  UpperCaseStringValidator,
 } from ".";
 
 export interface StringValidatorOptions {
@@ -113,23 +116,20 @@ export class StringValidator extends Validator<string> {
    * Trims the string after parsed.
    */
   trim() {
-    // SAFETY: We check anyway for null
-    return this.afterParse((x) => (x == null ? x : x.trim()));
+    return new TrimStringValidator(this);
   }
 
   /**
    * Converts this string to lowercase after parsed.
    */
   toLowerCase() {
-    // SAFETY: We check anyway for null
-    return this.afterParse((x) => (x == null ? x : x.toLowerCase()));
+    return new LowerCaseStringValidator(this);
   }
 
   /**
    * Converts this string to uppercase after parsed.
    */
   toUpperCase() {
-    // SAFETY: We check anyway for null
-    return this.afterParse((x) => (x == null ? x : x.toUpperCase()));
+    return new UpperCaseStringValidator(this);
   }
 }

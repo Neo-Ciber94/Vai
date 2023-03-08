@@ -15,17 +15,17 @@ import {
   VoidValidator,
   LiteralValidator,
   InstanceOfValidator,
-} from "./validators/common";
-import { BooleanValidatorOptions } from "./validators/common/boolean.validator";
-import { DateValidatorOptions } from "./validators/common/date.validator";
-import {
+  TupleValidator,
+  EnumValidator,
+  EnumValidatorOptions,
   InstanceOfValidatorOptions,
-  ObjectType,
-} from "./validators/common/instanceof.validator";
-
-import { PrimitiveType } from "./validators/common/literal.validator";
+} from "./validators/common";
+import type { BooleanValidatorOptions } from "./validators/common/boolean.validator";
+import type { DateValidatorOptions } from "./validators/common/date.validator";
+import type { ValidEnumType } from "./validators/common/enum.validator";
+import type { PrimitiveType } from "./validators/common/literal.validator";
 import { NumberValidatorOptions } from "./validators/common/number.validator";
-import { TupleValidator } from "./validators/common/tuple.validator";
+import type { ObjectType } from "./validators/common/instanceof.validator";
 
 /**
  * Convenient type for accessing the validators.
@@ -88,6 +88,16 @@ const baseValidator = {
    */
   literal: <T extends PrimitiveType>(constant: T) =>
     new LiteralValidator(constant),
+
+  /**
+   * A validator for that expect the matching values.
+   * @param values The valid values of the enum.
+   * @param options The options.
+   */
+  enum: <T extends ValidEnumType, U extends [T, ...T[]]>(
+    values: U,
+    options: EnumValidatorOptions = {}
+  ) => new EnumValidator(values, options),
 
   /**
    * A validator for check type instances.
