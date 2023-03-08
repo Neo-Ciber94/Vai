@@ -1,4 +1,5 @@
 import { ValidationResult, Validator } from "../../core/validator";
+import { getErrorMessage } from "../../utils/getErrorMessage";
 
 export interface AssertValidatorOptions<T> {
   condition: (value: T) => boolean;
@@ -26,10 +27,10 @@ export class AssertValidator<T> extends Validator<T> {
 
     if (typeof conditionOrOptions === "object") {
       this.condition = conditionOrOptions.condition;
-      this.message = getMessageFunction(conditionOrOptions.message);
+      this.message = getErrorMessage(conditionOrOptions.message, "assertion failed");
     } else {
       this.condition = conditionOrOptions;
-      this.message = getMessageFunction(message);
+      this.message = getErrorMessage(message, "assertion failed");
     }
   }
 
@@ -50,16 +51,4 @@ export class AssertValidator<T> extends Validator<T> {
 
     return result;
   }
-}
-
-function getMessageFunction<T>(
-  valueOrFunction: string | ((arg: T) => string) | undefined
-) {
-  if (valueOrFunction == null) {
-    return () => "assertion failed";
-  }
-
-  return typeof valueOrFunction === "string"
-    ? () => valueOrFunction
-    : valueOrFunction;
 }

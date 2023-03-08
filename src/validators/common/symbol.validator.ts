@@ -1,4 +1,5 @@
 import { ValidationResult, Validator } from "../../core/validator";
+import { getErrorMessage } from "../../utils/getErrorMessage";
 
 export interface SymbolValidatorOptions {
   message?: string | ((value: unknown) => string);
@@ -10,17 +11,10 @@ export class SymbolValidator extends Validator<symbol> {
   constructor(options: SymbolValidatorOptions = {}) {
     super();
 
-    const message = options.message;
-
-    if (message == null) {
-      this.message = stringErrorFactory;
-    } else if (typeof message === "string") {
-      this.message = () => message;
-    } else if (typeof message === "function") {
-      this.message = message;
-    } else {
-      throw new Error("invalid message type: " + typeof message);
-    }
+    this.message = getErrorMessage(
+      options.message,
+      (v) => `expected symbol but was ${typeof v}`
+    );
   }
 
   parseSafe(value: unknown): ValidationResult<symbol> {
@@ -33,7 +27,3 @@ export class SymbolValidator extends Validator<symbol> {
     return { success: true, value };
   }
 }
-
-const stringErrorFactory = (value: unknown) => {
-  return `expected symbol but was ${typeof value}`;
-};

@@ -1,9 +1,16 @@
 import { ValidationResult, Validator } from "../../core/validator";
+import { getErrorMessage } from "../../utils/getErrorMessage";
 
 /**
  * A primitive type.
  */
-export type PrimitiveType = string | number | boolean | bigint | null | undefined;
+export type PrimitiveType =
+  | string
+  | number
+  | boolean
+  | bigint
+  | null
+  | undefined;
 
 export type LiteralValidatorOptions = {
   message?: string | ((constant: PrimitiveType, value: unknown) => string);
@@ -18,17 +25,13 @@ export class LiteralValidator<T extends PrimitiveType> extends Validator<T> {
   ) {
     super();
 
-    const message = options.message;
-
-    if (message == null) {
-      this.message = errorFactory;
-    } else if (typeof message === "string") {
-      this.message = () => message;
-    } else if (typeof message === "function") {
-      this.message = message;
-    } else {
-      throw new Error("invalid message type: " + typeof message);
-    }
+    this.message = (constant, value) => {
+      return options.message == null
+        ? `expected ${constant} but was ${value}`
+        : typeof options.message == "string"
+        ? options.message
+        : options.message(constant, value);
+    };
   }
 
   parseSafe(value: unknown): ValidationResult<T> {
@@ -41,7 +44,3 @@ export class LiteralValidator<T extends PrimitiveType> extends Validator<T> {
     return { success: true, value: this.constant };
   }
 }
-
-const errorFactory = (constant: PrimitiveType, value: unknown) => {
-  return `expected ${constant} but was ${value}`;
-};

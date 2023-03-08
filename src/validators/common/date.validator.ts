@@ -1,4 +1,5 @@
 import { ValidationResult, Validator } from "../../core/validator";
+import { getErrorMessage } from "../../utils/getErrorMessage";
 
 export interface DateValidatorOptions {
   message?: string | ((value: unknown) => string);
@@ -10,17 +11,10 @@ export class DateValidator extends Validator<Date> {
   constructor(options: DateValidatorOptions = {}) {
     super();
 
-    const message = options.message;
-
-    if (message == null) {
-      this.message = dateErrorFactory;
-    } else if (typeof message === "string") {
-      this.message = () => message;
-    } else if (typeof message === "function") {
-      this.message = message;
-    } else {
-      throw new Error("invalid message type: " + typeof message);
-    }
+    this.message = getErrorMessage(
+      options.message,
+      (v) => `expected Date but was ${typeof v}`
+    );
   }
 
   parseSafe(value: unknown): ValidationResult<Date> {
@@ -33,7 +27,3 @@ export class DateValidator extends Validator<Date> {
     return { success: true, value };
   }
 }
-
-const dateErrorFactory = (value: unknown) => {
-  return `expected date but was ${typeof value}`;
-};

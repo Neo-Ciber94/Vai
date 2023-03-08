@@ -7,6 +7,7 @@ import {
   MaxValidator,
   MaxValidatorOptions,
 } from ".";
+import { getErrorMessage } from "../../utils/getErrorMessage";
 
 export interface NumberValidatorOptions {
   message?: string | ((value: unknown) => string);
@@ -18,17 +19,10 @@ export class NumberValidator extends Validator<number> {
   constructor(options: NumberValidatorOptions = {}) {
     super();
 
-    const message = options.message;
-
-    if (message == null) {
-      this.message = numberErrorFactory;
-    } else if (typeof message === "string") {
-      this.message = () => message;
-    } else if (typeof message === "function") {
-      this.message = message;
-    } else {
-      throw new Error("invalid message type: " + typeof message);
-    }
+    this.message = getErrorMessage(
+      options.message,
+      (v) => `expected number but was ${typeof v}`
+    );
   }
 
   parseSafe(value: unknown): ValidationResult<number> {
@@ -53,7 +47,3 @@ export class NumberValidator extends Validator<number> {
     return new MaxValidator(this, maxValue, options);
   }
 }
-
-const numberErrorFactory = (value: unknown) => {
-  return `expected number but was ${typeof value}`;
-};
