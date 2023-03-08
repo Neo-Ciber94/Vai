@@ -18,12 +18,18 @@ export class DateValidator extends Validator<Date> {
   }
 
   parseSafe(value: unknown): ValidationResult<Date> {
-    if (!(value instanceof Date) || Number.isNaN(value.getTime())) {
+    let date = value;
+
+    if (typeof value === "string") {
+      date = new Date(value);
+    }
+
+    if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
       return {
-        error: this.message(value),
+        error: this.message(date),
       };
     }
 
-    return { success: true, value };
+    return { success: true, value: date };
   }
 }
