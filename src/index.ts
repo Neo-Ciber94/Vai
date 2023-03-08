@@ -14,9 +14,17 @@ import {
   UnionValidator,
   VoidValidator,
   LiteralValidator,
+  InstanceOfValidator,
 } from "./validators/common";
+import { BooleanValidatorOptions } from "./validators/common/boolean.validator";
+import { DateValidatorOptions } from "./validators/common/date.validator";
+import {
+  InstanceOfValidatorOptions,
+  ObjectType,
+} from "./validators/common/instanceof.validator";
 
 import { PrimitiveType } from "./validators/common/literal.validator";
+import { NumberValidatorOptions } from "./validators/common/number.validator";
 import { TupleValidator } from "./validators/common/tuple.validator";
 
 /**
@@ -41,17 +49,19 @@ const baseValidator = {
   /**
    * Number validator.
    */
-  number: () => new NumberValidator(),
+  number: (options: NumberValidatorOptions = {}) =>
+    new NumberValidator(options),
 
   /**
    * Boolean validator.
    */
-  boolean: () => new BooleanValidator(),
+  boolean: (options: BooleanValidatorOptions = {}) =>
+    new BooleanValidator(options),
 
   /**
    * Date validator.
    */
-  date: () => new DateValidator(),
+  date: (options: DateValidatorOptions = {}) => new DateValidator(options),
 
   /**
    * A null validator.
@@ -76,7 +86,18 @@ const baseValidator = {
   /**
    * A validator for a constant literal type value.
    */
-  literal: <T extends PrimitiveType>(constant: T) => new LiteralValidator(constant),
+  literal: <T extends PrimitiveType>(constant: T) =>
+    new LiteralValidator(constant),
+
+  /**
+   * A validator for check type instances.
+   * @param obj The object constructor.
+   * @param options The options.
+   */
+  instanceof: <T extends ObjectType>(
+    obj: T,
+    options: InstanceOfValidatorOptions = {}
+  ) => new InstanceOfValidator(obj, options),
 
   /**
    * Object validator.

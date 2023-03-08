@@ -4,16 +4,14 @@ import {
   CheckStringValidatorOptions,
   EndsWithStringValidator,
   ExactStringLengthValidator,
-  ExactStringLengthValidatorOptions,
   IncludesStringValidator,
   MaxStringLengthValidator,
-  MaxStringLengthValidatorOptions,
   MinStringLengthValidator,
-  MinStringLengthValidatorOptions,
   RegexValidator,
   RegexValidatorOptions,
   StartsWithStringValidator,
-} from "../strings";
+  StringLengthValidatorOptions,
+} from ".";
 
 export interface StringValidatorOptions {
   message?: string | ((value: unknown) => string);
@@ -55,7 +53,7 @@ export class StringValidator extends Validator<string> {
    * @param minLength The minimum length of the string.
    * @param options The options.
    */
-  min(minLength: number, options: MinStringLengthValidatorOptions = {}) {
+  min(minLength: number, options: StringLengthValidatorOptions = {}) {
     return new MinStringLengthValidator(this, minLength, options);
   }
 
@@ -64,7 +62,7 @@ export class StringValidator extends Validator<string> {
    * @param maxLength The maximum length of the string.
    * @param options The options.
    */
-  max(maxLength: number, options: MaxStringLengthValidatorOptions = {}) {
+  max(maxLength: number, options: StringLengthValidatorOptions = {}) {
     return new MaxStringLengthValidator(this, maxLength, options);
   }
 
@@ -73,7 +71,7 @@ export class StringValidator extends Validator<string> {
    * @param exactLength The length expected from the string.
    * @param options The options.
    */
-  length(exactLength: number, options: ExactStringLengthValidatorOptions = {}) {
+  length(exactLength: number, options: StringLengthValidatorOptions = {}) {
     return new ExactStringLengthValidator(this, exactLength, options);
   }
 

@@ -28,6 +28,12 @@ export { LiteralValidator } from "./literal.validator";
 export { AssertValidator } from "./assert.validator";
 export { DefaultValidator } from "./default.validator";
 export { BeforeValidator, AfterValidator } from "./pipe.validator";
+export {
+  InstanceOfValidator,
+  InstanceOfValidatorOptions,
+} from "./instanceof.validator";
 
 // Numbers
 export * from "../numbers";
+export * from "../strings";
+export * from "../arrays";

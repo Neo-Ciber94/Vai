@@ -8,7 +8,7 @@ import {
   ExactArrayLengthValidator,
   MaxArrayLengthValidator,
   MinArrayLengthValidator,
-} from "../arrays";
+} from ".";
 
 import { UnknownValidator } from "./unknown.validator";
 

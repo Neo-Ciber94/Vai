@@ -27,9 +27,5 @@ if (result.success === true) {
   const value = result.value;
 }
 
-const validator = v
-  .date()
-  .beforeParse((x) => new Date(x))
-  .afterParse(String);
-
-console.log(validator.parseSafe("2023-01-01"));
+const validator = v.instanceof(Date);
+console.log(validator.parseSafe(new Date()));
