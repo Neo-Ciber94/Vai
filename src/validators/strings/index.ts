@@ -14,3 +14,10 @@ export {
 } from "./length.validator";
 
 export { RegexValidator, RegexValidatorOptions } from "./regex.validator";
+
+export {
+  CheckStringValidatorOptions,
+  EndsWithStringValidator,
+  StartsWithStringValidator,
+  IncludesStringValidator,
+} from "./check.validator";

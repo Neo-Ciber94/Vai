@@ -8,7 +8,7 @@ export interface ExactStringLengthValidatorOptions {
 export class ExactStringLengthValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
-    private readonly length: number,
+    private readonly exactLength: number,
     options: ExactStringLengthValidatorOptions = {}
   ) {
     super({
@@ -16,7 +16,7 @@ export class ExactStringLengthValidator extends StringValidator {
         const m =
           options.message ||
           ((s: string) =>
-            `string expected length is ${length} but was ${s.length}`);
+            `string expected length is ${exactLength} but was ${s.length}`);
         return typeof m === "string" ? m : m(value as string);
       },
     });
@@ -29,7 +29,7 @@ export class ExactStringLengthValidator extends StringValidator {
       return result;
     }
 
-    if (result.value.length !== this.length) {
+    if (result.value.length !== this.exactLength) {
       return {
         error: this.message(value),
       };

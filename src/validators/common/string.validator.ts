@@ -1,14 +1,18 @@
 import { ValidationResult, Validator } from "../../core/validator";
 import { getErrorMessage } from "../../utils/getErrorMessage";
 import {
+  CheckStringValidatorOptions,
+  EndsWithStringValidator,
   ExactStringLengthValidator,
   ExactStringLengthValidatorOptions,
+  IncludesStringValidator,
   MaxStringLengthValidator,
   MaxStringLengthValidatorOptions,
   MinStringLengthValidator,
   MinStringLengthValidatorOptions,
   RegexValidator,
   RegexValidatorOptions,
+  StartsWithStringValidator,
 } from "../strings";
 
 export interface StringValidatorOptions {
@@ -71,5 +75,37 @@ export class StringValidator extends Validator<string> {
    */
   length(exactLength: number, options: ExactStringLengthValidatorOptions = {}) {
     return new ExactStringLengthValidator(this, exactLength, options);
+  }
+
+  /**
+   * After parse checks if the string starts with the given string.
+   * @param str The string to use.
+   */
+  startsWith(str: string, options: CheckStringValidatorOptions = {}) {
+    return new StartsWithStringValidator(this, str, options);
+  }
+
+  /**
+   * After parse checks if the string ends with the given string.
+   * @param str The string to use.
+   */
+  endsWith(str: string, options: CheckStringValidatorOptions = {}) {
+    return new EndsWithStringValidator(this, str, options);
+  }
+
+  /**
+   * After parse checks if the string includes with the given string.
+   * @param str The string to use.
+   */
+  includes(str: string, options: CheckStringValidatorOptions = {}) {
+    return new IncludesStringValidator(this, str, options);
+  }
+
+  /**
+   * Trims the string after parsed.
+   */
+  trim() {
+    // SAFETY: We check anyway for null
+    return this.afterParse((x) => (x == null ? x : x.trim()));
   }
 }
