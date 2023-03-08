@@ -52,3 +52,53 @@ personSchema.parse({
   ],
 });
 ```
+
+## TODO
+
+### Validators
+
+- [ ] `nan()`
+
+### Utilities
+
+- [ ] Infer result type of a validator
+
+### Number validators
+
+- [ ] `number.positive()`
+- [ ] `number.negative()`
+- [ ] `number.gt(number)`
+- [ ] `number.lt(number)`
+- [ ] `number.gte(number)`
+- [ ] `number.lte(number)`
+- [ ] `number.nonzero()`
+- [ ] `number.finite()`
+- [ ] `number.safe()`
+- [ ] `number.even()`
+- [ ] `number.odd()`
+
+### Number transformations
+
+- [ ] `number.floor()`
+- [ ] `number.ceil()`
+- [ ] `number.round()`
+
+### Bigint validators
+
+- [ ] `number.positive()`
+- [ ] `number.negative()`
+- [ ] `number.gt(number)`
+- [ ] `number.lt(number)`
+- [ ] `number.gte(number)`
+- [ ] `number.lte(number)`
+- [ ] `number.nonzero()`
+- [ ] `number.finite()`
+- [ ] `number.safe()`
+- [ ] `number.even()`
+- [ ] `number.odd()`
+
+### Object validators
+
+- [ ] `object.extend(object)`
+- [ ] `object.pick(object)`
+- [ ] `object.omit(object)`
