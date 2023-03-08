@@ -26,7 +26,7 @@ export class NumberValidator extends Validator<number> {
   }
 
   parseSafe(value: unknown): ValidationResult<number> {
-    if (typeof value !== "number") {
+    if (typeof value !== "number" || Number.isNaN(value)) {
       return {
         error: this.message(value),
       };
