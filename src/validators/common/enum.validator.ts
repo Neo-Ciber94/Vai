@@ -12,7 +12,7 @@ export type ValidEnumType = string | number | bigint;
 
 export class EnumValidator<
   T extends ValidEnumType,
-  U extends [T, ...T[]]
+  U extends Readonly<[T, ...T[]]>
 > extends Validator<U> {
   protected readonly message: (value: unknown) => string;
 

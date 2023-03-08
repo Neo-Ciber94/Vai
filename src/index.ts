@@ -26,6 +26,7 @@ import type { ValidEnumType } from "./validators/common/enum.validator";
 import type { PrimitiveType } from "./validators/common/literal.validator";
 import { NumberValidatorOptions } from "./validators/common/number.validator";
 import type { ObjectType } from "./validators/common/instanceof.validator";
+import { StringValidatorOptions } from "./validators/common/string.validator";
 
 /**
  * Convenient type for accessing the validators.
@@ -44,7 +45,8 @@ const baseValidator = {
   /**
    * String validator.
    */
-  string: () => new StringValidator(),
+  string: (options: StringValidatorOptions = {}) =>
+    new StringValidator(options),
 
   /**
    * Number validator.
@@ -94,7 +96,7 @@ const baseValidator = {
    * @param values The valid values of the enum.
    * @param options The options.
    */
-  enum: <T extends ValidEnumType, U extends [T, ...T[]]>(
+  enum: <T extends ValidEnumType, U extends Readonly<[T, ...T[]]>>(
     values: U,
     options: EnumValidatorOptions = {}
   ) => new EnumValidator(values, options),
@@ -118,7 +120,7 @@ const baseValidator = {
   /**
    * Array validator.
    */
-  array: <T extends Validator<unknown> = UnknownValidator>(schema?: T) =>
+  array: <T extends Validator<any> = AnyValidator>(schema?: T) =>
     new ArrayValidator<T>(schema!),
 
   /**

@@ -18,3 +18,9 @@ export {
   EmailStringValidator,
   EmailStringValidatorOptions,
 } from "./email.validator";
+
+export {
+  TrimStringValidator,
+  LowerCaseStringValidator,
+  UpperCaseStringValidator,
+} from "./transform";
