@@ -1,15 +1,15 @@
 import { ValidationResult } from "../../core/validator";
 import { StringValidator } from "../common";
 
-export interface MatchValidatorOptions {
+export interface RegexValidatorOptions {
   message?: string | ((value: string) => string);
 }
 
-export class MatchValidator extends StringValidator {
+export class RegexValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
     private readonly regex: RegExp,
-    options: MatchValidatorOptions = {}
+    options: RegexValidatorOptions = {}
   ) {
     super({
       message: (value: unknown) => {

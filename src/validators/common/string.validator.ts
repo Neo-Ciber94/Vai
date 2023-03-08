@@ -3,12 +3,12 @@ import { getErrorMessage } from "../../utils/getErrorMessage";
 import {
   ExactStringLengthValidator,
   ExactStringLengthValidatorOptions,
-  MatchValidator,
-  MatchValidatorOptions,
   MaxStringLengthValidator,
   MaxStringLengthValidatorOptions,
   MinStringLengthValidator,
   MinStringLengthValidatorOptions,
+  RegexValidator,
+  RegexValidatorOptions,
 } from "../strings";
 
 export interface StringValidatorOptions {
@@ -42,8 +42,8 @@ export class StringValidator extends Validator<string> {
    * @param regex The regex used to match the string.
    * @param options The options.
    */
-  match(regex: RegExp, options: MatchValidatorOptions = {}) {
-    return new MatchValidator(this, regex, options);
+  regex(regex: RegExp, options: RegexValidatorOptions = {}) {
+    return new RegexValidator(this, regex, options);
   }
 
   /**

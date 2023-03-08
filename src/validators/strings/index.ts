@@ -13,4 +13,4 @@ export {
   ExactStringLengthValidatorOptions,
 } from "./length.validator";
 
-export { MatchValidator, MatchValidatorOptions } from "./match.validator";
+export { RegexValidator, RegexValidatorOptions } from "./regex.validator";
