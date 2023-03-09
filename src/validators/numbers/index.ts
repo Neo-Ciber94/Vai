@@ -1,3 +1,13 @@
 export { IntegerValidator } from "./integer.validator";
-export { MinValidator, MinValidatorOptions } from "./min.validator";
-export { MaxValidator, MaxValidatorOptions } from "./max.validator";
+export {
+  MaxNumberValidator,
+  MinNumberValidator,
+  GreaterOrEqualThanNumberValidator,
+  GreaterThanNumberValidator,
+  LowerOrEqualThanNumberValidator,
+  LowerThanNumberValidator,
+  NegativeNumberValidator,
+  PositiveNumberValidator,
+  NonZeroNumberValidator,
+  ValidatorComparisonOptions,
+} from "./comparison.validator";

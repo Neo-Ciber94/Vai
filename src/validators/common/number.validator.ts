@@ -1,10 +1,15 @@
 import { ValidationResult, Validator } from "../../core/validator";
 import {
-  MinValidator,
-  MinValidatorOptions,
+  GreaterOrEqualThanNumberValidator,
+  GreaterThanNumberValidator,
   IntegerValidator,
-  MaxValidator,
-  MaxValidatorOptions,
+  LowerOrEqualThanNumberValidator,
+  LowerThanNumberValidator,
+  MaxNumberValidator,
+  MinNumberValidator,
+  NegativeNumberValidator,
+  PositiveNumberValidator,
+  ValidatorComparisonOptions,
 } from ".";
 import {
   GetMessage,
@@ -37,11 +42,53 @@ export class NumberValidator extends Validator<number> {
     return new IntegerValidator(this, options);
   }
 
-  min(minValue: number, options: MinValidatorOptions = {}): MinValidator {
-    return new MinValidator(this, minValue, options);
+  min(
+    minValue: number,
+    options: ValidatorComparisonOptions = {}
+  ): MinNumberValidator {
+    return new MinNumberValidator(this, minValue, options);
   }
 
-  max(maxValue: number, options: MaxValidatorOptions = {}): MaxValidator {
-    return new MaxValidator(this, maxValue, options);
+  max(
+    maxValue: number,
+    options: ValidatorComparisonOptions = {}
+  ): MaxNumberValidator {
+    return new MaxNumberValidator(this, maxValue, options);
+  }
+
+  gt(
+    other: number,
+    options: ValidatorComparisonOptions = {}
+  ): GreaterThanNumberValidator {
+    return new GreaterThanNumberValidator(this, other, options);
+  }
+
+  lt(
+    other: number,
+    options: ValidatorComparisonOptions = {}
+  ): LowerThanNumberValidator {
+    return new LowerThanNumberValidator(this, other, options);
+  }
+
+  gte(
+    other: number,
+    options: ValidatorComparisonOptions = {}
+  ): GreaterOrEqualThanNumberValidator {
+    return new GreaterOrEqualThanNumberValidator(this, other, options);
+  }
+
+  lte(
+    other: number,
+    options: ValidatorComparisonOptions = {}
+  ): LowerOrEqualThanNumberValidator {
+    return new LowerOrEqualThanNumberValidator(this, other, options);
+  }
+
+  positive(options: ValidatorOptions = {}): PositiveNumberValidator {
+    return new PositiveNumberValidator(this, options);
+  }
+
+  negative(options: ValidatorOptions = {}): NegativeNumberValidator {
+    return new NegativeNumberValidator(this, options);
   }
 }

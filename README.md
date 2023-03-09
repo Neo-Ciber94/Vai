@@ -65,13 +65,13 @@ personSchema.parse({
 
 ### Number validators
 
-- [ ] `number.positive()`
-- [ ] `number.negative()`
-- [ ] `number.gt(number)`
-- [ ] `number.lt(number)`
-- [ ] `number.gte(number)`
-- [ ] `number.lte(number)`
-- [ ] `number.nonzero()`
+- [x] `number.positive()`
+- [x] `number.negative()`
+- [x] `number.gt(number)`
+- [x] `number.lt(number)`
+- [x] `number.gte(number)`
+- [x] `number.lte(number)`
+- [x] `number.nonzero()`
 - [ ] `number.finite()`
 - [ ] `number.safe()`
 - [ ] `number.even()`
