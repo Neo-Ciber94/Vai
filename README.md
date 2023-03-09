@@ -72,10 +72,10 @@ personSchema.parse({
 - [x] `number.gte(number)`
 - [x] `number.lte(number)`
 - [x] `number.nonzero()`
-- [ ] `number.finite()`
-- [ ] `number.safe()`
-- [ ] `number.even()`
-- [ ] `number.odd()`
+- [x] `number.finite()`
+- [x] `number.safe()`
+- [x] `number.even()`
+- [x] `number.odd()`
 
 ### Number transformations
 

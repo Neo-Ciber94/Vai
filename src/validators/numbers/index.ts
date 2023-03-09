@@ -1,4 +1,10 @@
-export { IntegerValidator } from "./integer.validator";
+export {
+  IntegerValidator,
+  FiniteNumberValidator,
+  SafeNumberValidator,
+  EvenNumberValidator,
+  OddNumberValidator,
+} from "./integer.validator";
 export {
   MaxNumberValidator,
   MinNumberValidator,

@@ -15,9 +15,9 @@ describe("RecordValidator", () => {
   test("expect a valid record", () => {
     expect(
       recordValidator.parseSafe({
-        one: { value: 10 },
-        two: { value: 15 },
-        three: { value: 20 },
+        one: { value: 15 },
+        two: { value: 20 },
+        three: { value: 25 },
       }).success
     ).toBeTruthy();
   });
