@@ -2,6 +2,7 @@ import { ValidatorOptions, getValidationError } from "../../core/options";
 import { ValidationResult } from "../../core/validator";
 import { StringValidator } from "../common";
 
+// startsWith(string)
 export class StartsWithStringValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
@@ -32,6 +33,7 @@ export class StartsWithStringValidator extends StringValidator {
   }
 }
 
+// endsWith(string)
 export class EndsWithStringValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
@@ -62,6 +64,7 @@ export class EndsWithStringValidator extends StringValidator {
   }
 }
 
+// includes(string)
 export class IncludesStringValidator extends StringValidator {
   constructor(
     private readonly parent: StringValidator,
@@ -86,6 +89,30 @@ export class IncludesStringValidator extends StringValidator {
       return {
         error: this.message(value),
       };
+    }
+
+    return result;
+  }
+}
+
+// nonempty()
+export class NonEmptyStringValidator extends StringValidator {
+  constructor(
+    private readonly parent: StringValidator,
+    options: ValidatorOptions<string> = {}
+  ) {
+    super({
+      message: getValidationError(
+        options.message,
+        "string cannot be blank or empty"
+      ) as (value: unknown) => string,
+    });
+  }
+
+  parseSafe(value: unknown): ValidationResult<string> {
+    const result = this.parent.parseSafe(value);
+    if (result.success === true && result.value.trim().length === 0) {
+      return { error: this.message(value) };
     }
 
     return result;

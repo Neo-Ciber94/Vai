@@ -61,7 +61,11 @@ personSchema.parse({
 
 ### Utilities
 
-- [ ] Infer result type of a validator
+- [x] Infer result type of a validator
+
+### String validators
+
+- [x] `string.nonempty()`
 
 ### Number validators
 

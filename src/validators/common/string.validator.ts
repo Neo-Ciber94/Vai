@@ -7,6 +7,7 @@ import {
   LowerCaseStringValidator,
   MaxStringLengthValidator,
   MinStringLengthValidator,
+  NonEmptyStringValidator,
   RegexValidator,
   StartsWithStringValidator,
   TrimStringValidator,
@@ -105,6 +106,14 @@ export class StringValidator extends Validator<string> {
    */
   includes(str: string, options: ValidatorOptions = {}) {
     return new IncludesStringValidator(this, str, options);
+  }
+
+  /**
+   * Checks the string is not empty or whitespace.
+   * @param options The options.
+   */
+  nonempty(options: ValidatorOptions<string> = {}) {
+    return new NonEmptyStringValidator(this, options);
   }
 
   /**
