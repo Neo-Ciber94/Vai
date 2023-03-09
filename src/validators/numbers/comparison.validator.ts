@@ -226,7 +226,7 @@ export class NonZeroNumberValidator extends NumberValidator {
     private readonly parent: NumberValidator,
     options: ValidatorOptions
   ) {
-    super({ message: options.message || ((v) => `${v} is zero`) });
+    super({ message: options.message || "value is zero" });
   }
 
   parseSafe(value: unknown): ValidationResult<number> {
