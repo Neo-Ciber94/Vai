@@ -159,3 +159,23 @@ export function createValidator<T extends Record<string, Validator<unknown>>>(
   const initialSchemas: any = schemas || {};
   return Object.freeze({ ...baseValidator, ...initialSchemas });
 }
+
+/**
+ * Infers the type of a validator resulting value.
+ * 
+ * @example
+ * ```typescript
+ * const v = createValidator();
+ * 
+ * const Person = v.object({
+ *   name: v.string().min(1),
+ *   age: v.number().integer().min(1).max(120),
+ *   email: v.string().email().optional(),
+ * });
+ * 
+ * type PersonModel = Infer<typeof Person>;
+ * 
+ * ```
+ */
+export type Infer<T extends Validator<any>> = ReturnType<T["parse"]>;
+

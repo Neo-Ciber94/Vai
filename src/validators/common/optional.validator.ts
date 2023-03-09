@@ -10,7 +10,7 @@ export class OptionalValidator<
 
   parseSafe(value: unknown): ValidationResult<Output> {
     if (value === undefined) {
-      return { success: true, value: undefined };
+      return { success: true, value: undefined! };
     }
 
     return this.validator.parseSafe(
