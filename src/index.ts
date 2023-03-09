@@ -23,7 +23,7 @@ import {
 import type { ValidEnumType } from "./validators/common/enum.validator";
 import type { PrimitiveType } from "./validators/common/literal.validator";
 import type { ObjectType } from "./validators/common/instanceof.validator";
-import { ValidatorOptions } from "./core/options";
+import type { ValidatorOptions } from "./core/options";
 
 /**
  * Convenient type for accessing the validators.
