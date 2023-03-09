@@ -27,7 +27,7 @@ export class MaxNumberValidator extends NumberValidator {
   parseSafe(value: unknown): ValidationResult<number> {
     const result = this.parent.parseSafe(value);
 
-    if (result.success !== true || result.value < this.maxValue) {
+    if (result.success !== true || result.value <= this.maxValue) {
       return result;
     }
 
@@ -56,7 +56,7 @@ export class MinNumberValidator extends NumberValidator {
   parseSafe(value: unknown): ValidationResult<number> {
     const result = this.parent.parseSafe(value);
 
-    if (result.success !== true || result.value > this.minValue) {
+    if (result.success !== true || result.value >= this.minValue) {
       return result;
     }
 
