@@ -7,13 +7,13 @@ import {
   MaxValidatorOptions,
 } from ".";
 import {
-  ErrorMessage,
+  GetMessage,
   ValidatorOptions,
   getValidationError,
 } from "../../core/options";
 
 export class NumberValidator extends Validator<number> {
-  protected readonly message: ErrorMessage;
+  protected readonly message: GetMessage;
   constructor(options: ValidatorOptions = {}) {
     super();
 

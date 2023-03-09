@@ -1,5 +1,5 @@
 import {
-  ErrorMessage,
+  GetMessage,
   ValidatorOptions,
   getValidationError,
 } from "../../core/options";
@@ -14,7 +14,7 @@ export class InstanceOfValidator<
   T extends ObjectType,
   Output = InstanceType<T>
 > extends Validator<Output> {
-  protected readonly message: ErrorMessage;
+  protected readonly message: GetMessage;
 
   constructor(private readonly obj: T, options: ValidatorOptions = {}) {
     super();

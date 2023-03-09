@@ -1,5 +1,5 @@
 import {
-  ErrorMessage,
+  GetMessage,
   ValidatorOptions,
   getValidationError,
 } from "../../core/options";
@@ -20,7 +20,7 @@ export class EnumValidator<
   T extends Readonly<[U, ...U[]]>,
   Output = EnumKeys<T>
 > extends Validator<Output> {
-  protected readonly message: ErrorMessage;
+  protected readonly message: GetMessage;
 
   constructor(protected readonly values: T, options: ValidatorOptions = {}) {
     super();

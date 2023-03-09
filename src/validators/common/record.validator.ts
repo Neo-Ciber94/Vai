@@ -1,6 +1,6 @@
 import { ValidationContext } from "../../core/context";
 import {
-  ErrorMessage,
+  GetMessage,
   ValidatorOptions,
   getValidationError,
 } from "../../core/options";
@@ -20,7 +20,7 @@ export class RecordValidator<
   V extends Validator<any> = UnknownValidator,
   Output = Record<RecordKeyType<K>, ReturnType<V["parse"]>>
 > extends BaseObjectValidator<Output> {
-  private readonly message: ErrorMessage;
+  private readonly message: GetMessage;
 
   constructor(
     private readonly keyValidator: K,

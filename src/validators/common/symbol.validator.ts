@@ -1,12 +1,12 @@
 import {
-  ErrorMessage,
+  GetMessage,
   ValidatorOptions,
   getValidationError,
 } from "../../core/options";
 import { ValidationResult, Validator } from "../../core/validator";
 
 export class SymbolValidator extends Validator<symbol> {
-  protected readonly message: ErrorMessage;
+  protected readonly message: GetMessage;
   constructor(options: ValidatorOptions = {}) {
     super();
 

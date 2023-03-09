@@ -1,7 +1,11 @@
 /**
  * Represents a function that returns the error message.
  */
-export type ErrorMessage<T = unknown> = (value: T) => string;
+export type GetMessage<T = unknown> = T extends unknown[]
+  ? (...args: T) => string
+  : T extends infer U
+  ? (arg: U) => string
+  : never;
 
 /**
  * The params that take a validator.

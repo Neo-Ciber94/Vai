@@ -13,13 +13,13 @@ import {
   UpperCaseStringValidator,
 } from ".";
 import {
-  ErrorMessage,
+  GetMessage,
   ValidatorOptions,
   getValidationError,
 } from "../../core/options";
 
 export class StringValidator extends Validator<string> {
-  protected readonly message: ErrorMessage;
+  protected readonly message: GetMessage;
   constructor(options: ValidatorOptions = {}) {
     super();
 

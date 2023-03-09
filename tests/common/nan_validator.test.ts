@@ -15,6 +15,5 @@ describe("NanValidator", () => {
 
   test("input is a number", () => {
     expect(nanValidator.parseSafe(11234).success).toBeFalsy();
-
   });
 });
