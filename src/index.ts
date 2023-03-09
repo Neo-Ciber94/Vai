@@ -18,6 +18,7 @@ import {
   TupleValidator,
   EnumValidator,
   RecordValidator,
+  NanValidator,
 } from "./validators/common";
 import type { ValidEnumType } from "./validators/common/enum.validator";
 import type { PrimitiveType } from "./validators/common/literal.validator";
@@ -101,6 +102,11 @@ const baseValidator = {
    */
   instanceof: <T extends ObjectType>(obj: T, options: ValidatorOptions = {}) =>
     new InstanceOfValidator(obj, options),
+
+  /**
+   * Checks if the valid is NaN (no a number).
+   */
+  nan: () => new NanValidator(),
 
   /**
    * Object validator.

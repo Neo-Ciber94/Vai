@@ -57,7 +57,7 @@ personSchema.parse({
 
 ### Validators
 
-- [ ] `nan()`
+- [x] `nan()`
 
 ### Utilities
 

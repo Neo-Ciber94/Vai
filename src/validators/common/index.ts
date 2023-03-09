@@ -31,6 +31,7 @@ export { AssertValidator } from "./assert.validator";
 export { DefaultValidator } from "./default.validator";
 export { BeforeValidator, AfterValidator } from "./pipe.validator";
 export { InstanceOfValidator } from "./instanceof.validator";
+export { NanValidator } from "./nan.validator";
 
 // Numbers
 export * from "../numbers";
